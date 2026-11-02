@@ -1,0 +1,95 @@
+{
+  "_comment": "Example rup.ai configuration. Copy to your OS config dir (e.g. %APPDATA%\\rup.ai\\config.json or ~/.config/rup.ai/config.json). API keys are NOT stored in this file — use `rup.ai login`, which writes to the OS credential store.",
+  "version": 1,
+  "active_provider": "zai",
+  "active_model": "glm-4.6",
+  "providers": {
+    "zai": {
+      "kind": "openai",
+      "base_url": "https://api.z.ai/api/paas/v4",
+      "model": "glm-4.6",
+      "context_window": 200000,
+      "max_output_tokens": 8192,
+      "temperature": 0.2,
+      "timeout_seconds": 300,
+      "streaming": true,
+      "tools": true,
+      "auth": "api_key"
+    },
+    "openai": {
+      "kind": "openai",
+      "base_url": "https://api.openai.com/v1",
+      "model": "gpt-4o",
+      "context_window": 128000,
+      "max_output_tokens": 16384,
+      "temperature": 0.2,
+      "timeout_seconds": 300,
+      "streaming": true,
+      "tools": true,
+      "auth": "api_key",
+      "headers": {}
+    },
+    "anthropic": {
+      "kind": "anthropic",
+      "base_url": "https://api.anthropic.com",
+      "model": "claude-sonnet-4-5",
+      "context_window": 200000,
+      "max_output_tokens": 8192,
+      "temperature": 0.2,
+      "timeout_seconds": 300,
+      "streaming": true,
+      "tools": true,
+      "auth": "api_key"
+    },
+    "ollama": {
+      "kind": "openai",
+      "base_url": "http://127.0.0.1:11434/v1",
+      "model": "qwen2.5-coder:7b",
+      "context_window": 32768,
+      "max_output_tokens": 4096,
+      "temperature": 0.2,
+      "timeout_seconds": 600,
+      "streaming": true,
+      "tools": true,
+      "auth": "none"
+    },
+    "my-gateway": {
+      "_comment": "custom OpenAI-compatible gateway example",
+      "kind": "openai",
+      "base_url": "https://llm.internal.example.com/v1",
+      "model": "internal-coder",
+      "context_window": 64000,
+      "max_output_tokens": 4096,
+      "temperature": 0.1,
+      "timeout_seconds": 120,
+      "streaming": true,
+      "tools": true,
+      "auth": "api_key",
+      "headers": {
+        "X-Team": "platform"
+      }
+    }
+  },
+  "policies": {
+    "approval": "standard",
+    "workspace_jail": true,
+    "command_timeout_seconds": 180,
+    "max_agent_steps": 30,
+    "agent_timeout_minutes": 15
+  },
+  "context": {
+    "budget_tokens": 24000,
+    "tree_max_lines": 120,
+    "max_file_lines": 1600
+  },
+  "ui": {
+    "theme": "dark",
+    "animation": true,
+    "plain": false
+  },
+  "web": {
+    "enabled": true,
+    "bind": "127.0.0.1",
+    "port": 8618
+  }
+}
