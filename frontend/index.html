@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>rup.ai — companion</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="/logo.png" alt="rup.ai logo" class="logo" />
+        <div>
+          <div class="brand-name">rup.ai</div>
+          <div class="brand-sub">terminal-first AI coding agent · companion</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span id="connection" class="connection" title="backend connection">
+          <span class="dot" id="connection-dot"></span><span id="connection-text">connecting…</span>
+        </span>
+        <span id="version" class="version"></span>
+        <button id="theme-toggle" class="btn ghost" title="Switch theme">Theme</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="column">
+        <div class="card" id="status-card">
+          <h2>Agent status</h2>
+          <div class="grid two">
+            <div class="kv"><span class="k">Provider</span><span class="v" id="st-provider">—</span></div>
+            <div class="kv"><span class="k">Model</span><span class="v" id="st-model">—</span></div>
+            <div class="kv"><span class="k">Mode</span><span class="v" id="st-mode">—</span></div>
+            <div class="kv"><span class="k">Tokens</span><span class="v" id="st-tokens">—</span></div>
+            <div class="kv"><span class="k">Steps</span><span class="v" id="st-steps">—</span></div>
+            <div class="kv"><span class="k">Uptime</span><span class="v" id="st-uptime">—</span></div>
+          </div>
+          <div class="kv"><span class="k">Workspace</span><span class="v mono" id="st-workspace">—</span></div>
+        </div>
+
+        <div class="card" id="provider-card">
+          <h2>Provider &amp; model</h2>
+          <label class="field">
+            <span>Provider</span>
+            <select id="provider-select"></select>
+          </label>
+          <label class="field">
+            <span>Model</span>
+            <div class="row">
+              <input id="model-input" type="text" placeholder="model id" />
+              <button id="model-fetch" class="btn">Discover</button>
+            </div>
+          </label>
+          <datalist id="model-list"></datalist>
+          <label class="field">
+            <span>API key <em class="hint">(stored in your OS credential store — never displayed)</em></span>
+            <input id="api-key" type="password" placeholder="paste to replace" autocomplete="off" />
+          </label>
+          <div class="row gap">
+            <label class="field inline">
+              <span>Approval policy</span>
+              <select id="approval-select">
+                <option value="restricted">restricted</option>
+                <option value="standard">standard</option>
+                <option value="permissive">permissive</option>
+              </select>
+            </label>
+            <button id="save-config" class="btn primary">Save</button>
+          </div>
+          <div id="config-msg" class="msg"></div>
+        </div>
+
+        <div class="card" id="servers-card">
+          <h2>Development servers</h2>
+          <div id="servers-list" class="servers"><div class="empty">No servers detected. Start one from the agent with run_command(background=true).</div></div>
+        </div>
+      </section>
+
+      <section class="column wide">
+        <div class="card preview-card">
+          <h2>Live preview</h2>
+          <div class="preview-toolbar">
+            <select id="preview-server"></select>
+            <div class="viewports">
+              <button class="btn ghost vp" data-w="100%">Auto</button>
+              <button class="btn ghost vp" data-w="1280px">Desktop</button>
+              <button class="btn ghost vp" data-w="820px">Tablet</button>
+              <button class="btn ghost vp" data-w="390px">Mobile</button>
+            </div>
+            <div class="row gap">
+              <button id="preview-refresh" class="btn">Refresh</button>
+              <button id="preview-open" class="btn">Open in browser</button>
+            </div>
+          </div>
+          <div class="preview-frame-wrap">
+            <iframe id="preview-frame" title="Application preview" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
+          </div>
+          <pre id="server-output" class="server-output" hidden></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>rup.ai companion UI — served on localhost only. The CLI remains the primary interface.</span>
+    </footer>
+
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>
